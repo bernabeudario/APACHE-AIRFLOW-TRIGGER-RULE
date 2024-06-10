@@ -37,15 +37,15 @@ trigger_rule_value="all_success"
 #trigger_rule_value="none_skipped"
 #trigger_rule_value="always"
 
-def skipped_function():
+def _skipped_function():
     time.sleep(5)
     raise AirflowSkipException("Skipped")
 
-def failed_function():
+def _failed_function():
     time.sleep(5)
     raise ValueError("Failed")
 
-def print_function():
+def _print_function():
     print("Ready")
     return True
 
@@ -67,41 +67,41 @@ with DAG(
 
     task_c_1 = PythonOperator(
         task_id="task_c_1",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
     # 2nd pipeline ====================================
     task_a_2 = PythonOperator(
         task_id="task_a_2",
-        python_callable=failed_function
+        python_callable=_failed_function
     )
 
     task_b_2 = PythonOperator(
         task_id="task_b_2",
-        python_callable=failed_function
+        python_callable=_failed_function
     )
 
     task_c_2 = PythonOperator(
         task_id="task_c_2",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
     # 3rd pipeline ====================================
     task_a_3 = PythonOperator(
         task_id="task_a_3",
-        python_callable=skipped_function
+        python_callable=_skipped_function
     )
 
     task_b_3 = PythonOperator(
         task_id="task_b_3",
-        python_callable=skipped_function
+        python_callable=_skipped_function
     )
 
     task_c_3 = PythonOperator(
         task_id="task_c_3",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
@@ -112,12 +112,12 @@ with DAG(
 
     task_b_4 = PythonOperator(
         task_id="task_b_4",
-        python_callable=failed_function
+        python_callable=_failed_function
     )
 
     task_c_4 = PythonOperator(
         task_id="task_c_4",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
@@ -128,29 +128,29 @@ with DAG(
 
     task_b_5 = PythonOperator(
         task_id="task_b_5",
-        python_callable=skipped_function
+        python_callable=_skipped_function
     )
 
     task_c_5 = PythonOperator(
         task_id="task_c_5",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
     # 6th pipeline ====================================
     task_a_6 = PythonOperator(
         task_id="task_a_6",
-        python_callable=failed_function
+        python_callable=_failed_function
     )
 
     task_b_6 = PythonOperator(
         task_id="task_b_6",
-        python_callable=skipped_function
+        python_callable=_skipped_function
     )
 
     task_c_6 = PythonOperator(
         task_id="task_c_6",
-        python_callable=print_function,
+        python_callable=_print_function,
         trigger_rule=trigger_rule_value
     )
 
